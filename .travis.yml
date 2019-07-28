@@ -1,0 +1,25 @@
+language: php
+dist: trusty
+
+php:
+    - '7.2'
+    - '7.3'
+
+matrix:
+    include:
+        - php: '7.2'
+          env: 'COMPOSER_FLAGS="--prefer-stable --prefer-lowest"'
+
+before_script:
+    - travis_retry composer self-update
+    - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction
+    - travis_retry wget https://scrutinizer-ci.com/ocular.phar
+    - mkdir -p build/logs
+
+script:
+    - vendor/bin/phpstan --level=max analyse src
+    - vendor/bin/phpunit --coverage-clover=build/logs/clover.xml
+    - vendor/bin/phpcs --standard=PSR2 src
+
+after_script:
+    - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
