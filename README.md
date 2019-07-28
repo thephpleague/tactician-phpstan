@@ -1,4 +1,4 @@
-# Tactician
+# Tactician-PHPStan
 
 [![Travis CI](https://api.travis-ci.org/thephpleague/tactician-phpstan.svg?branch=master)](https://travis-ci.org/thephpleague/tactician-phpstan)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/thephpleague/tactician-phpstan/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/thephpleague/tactician-phpstan/?branch=master)
