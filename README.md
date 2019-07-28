@@ -5,7 +5,6 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/thephpleague/tactician-phpstan/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/thephpleague/tactician-phpstan/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/thephpleague/tactician-phpstan/badges/build.png?b=master)](https://scrutinizer-ci.com/g/thephpleague/tactician-phpstan/build-status/master)
 [![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/thephpleague/tactician-phpstan/blob/master/LICENSE)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/54275a78-bc70-4bb3-9ac4-4eee700c6a1c/small.png)](https://insight.sensiolabs.com/projects/54275a78-bc70-4bb3-9ac4-4eee700c6a1c)
 
 Static analysis for a small, pluggable command bus.
 
