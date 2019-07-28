@@ -6,7 +6,7 @@
 [![Build Status](https://scrutinizer-ci.com/g/thephpleague/tactician-phpstan/badges/build.png?b=master)](https://scrutinizer-ci.com/g/thephpleague/tactician-phpstan/build-status/master)
 [![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/thephpleague/tactician-phpstan/blob/master/LICENSE)
 
-Static analysis for a small, pluggable command bus.
+Static analysis for [a small, pluggable command bus](https://github.com/thephpleague/tactician).
 
 Traditionally, command buses can obscure static analysis. The Tactician PHPStan plugin helps bring stronger type checking by finding missing handler classes, validating handler return types and more.
 
