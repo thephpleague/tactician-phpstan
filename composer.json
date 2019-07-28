@@ -1,5 +1,6 @@
 {
     "name":        "league/tactician-phpstan",
+    "type":        "phpstan-extension",
     "description": "Find missing handlers, incorrect typehints and more.",
     "keywords":    ["command", "command bus", "service layer"],
     "license":     "MIT",
