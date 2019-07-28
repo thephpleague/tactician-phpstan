@@ -27,11 +27,13 @@ A simple version of this might look like:
 # handler-mapper-loader.php
 <?php
 
+require_once __DIR__.'/vendor/autoload.php';
+
 use League\Tactician\Handler\Mapping\ClassName\Suffix;
-use League\Tactician\Handler\Mapping\MappingByNamingConvention;
+use League\Tactician\Handler\Mapping\MapByNamingConvention;
 use League\Tactician\Handler\Mapping\MethodName\Handle;
 
-return new MappingByNamingConvention(
+return new MapByNamingConvention(
     new Suffix('Handler'),
     new Handle()
 );
