@@ -18,7 +18,22 @@ Using Composer:
 
 `composer require league/tactician-phpstan`
 
-## Setup
+## Register Plugin
+
+If you also install [phpstan/extension-installer](https://github.com/phpstan/extension-installer) then you're all set!
+
+<details>
+  <summary>Manual installation</summary>
+
+If you don't want to use `phpstan/extension-installer`, include extension.neon in your project's PHPStan config:
+
+```
+includes:
+    - vendor/league/tactician-phpstan/extension.neon
+```
+</details>
+
+## Configuration
 You'll need to make your `CommandToHandlerMapping` available to PHPStan. The easiest way to do this is to create a small bootstrap file that returns the same Handler configuration you use in your app. 
 
 A simple version of this might look like:
