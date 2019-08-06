@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace League\Tactician\Tests\PHPStan;
 
+use League\Tactician\CommandBus;
 use League\Tactician\Handler\Mapping\ClassName\Suffix;
 use League\Tactician\Handler\Mapping\MapByNamingConvention;
 use League\Tactician\Handler\Mapping\MethodName\Handle;
@@ -19,7 +20,8 @@ final class TacticianRuleSetTest extends RuleTestCase
                 new Suffix('Handler'),
                 new Handle()
             ),
-            $this->createBroker()
+            $this->createBroker(),
+            CommandBus::class
         );
     }
 

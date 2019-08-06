@@ -67,6 +67,20 @@ parameters:
 
 And you're good to go!
 
+## Using a different Command Bus class
+
+It's very common to have a bridge interface from your application to any external packages, including Tactician. In that case, you'll have a different command bus class and Tactician-PHPStan won't catch errors because it's looking for usages of the `League\Tactician\CommandBus`.
+
+Instead, you can configure the command bus class to scan for:
+
+~~~
+# phpstan.neon
+parameters:
+    tactician:
+        bootstrap: handler-mapping-loader.php
+        bus: My\App\CommandBus
+~~~
+
 ## Testing
 To run all unit tests, use the locally installed PHPUnit:
 

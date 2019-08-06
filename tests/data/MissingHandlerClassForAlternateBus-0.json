@@ -1,0 +1,7 @@
+[
+    {
+        "message": "Tactician tried to route the command MissingHandlerClassForAlternateBus\\SomeCommand but could not find the matching handler MissingHandlerClassForAlternateBus\\SomeCommandHandler.",
+        "line": 20,
+        "ignorable": true
+    }
+]

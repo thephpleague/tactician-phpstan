@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace League\Tactician\PHPStan;
 
-use League\Tactician\CommandBus;
 use League\Tactician\Handler\Mapping\CommandToHandlerMapping;
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
@@ -30,11 +29,16 @@ final class TacticianRuleSet implements Rule
      * @var Broker
      */
     private $broker;
+    /**
+     * @var string
+     */
+    private $commandBusClass;
 
-    public function __construct(CommandToHandlerMapping $mapping, Broker $broker)
+    public function __construct(CommandToHandlerMapping $mapping, Broker $broker, string $commandBusClass)
     {
         $this->mapping = $mapping;
         $this->broker = $broker;
+        $this->commandBusClass = $commandBusClass;
     }
 
     public function getNodeType(): string
@@ -50,7 +54,7 @@ final class TacticianRuleSet implements Rule
 
         $type = $scope->getType($methodCall->var);
 
-        if (! (new ObjectType(CommandBus::class))->isSuperTypeOf($type)->yes()) {
+        if (! (new ObjectType($this->commandBusClass))->isSuperTypeOf($type)->yes()) {
             return [];
         }
 

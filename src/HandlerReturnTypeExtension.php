@@ -3,10 +3,7 @@ declare(strict_types=1);
 
 namespace League\Tactician\PHPStan;
 
-use League\Tactician\CommandBus;
-use League\Tactician\Handler\Mapping\ClassName\ClassNameInflector;
 use League\Tactician\Handler\Mapping\CommandToHandlerMapping;
-use League\Tactician\Handler\Mapping\MethodName\MethodNameInflector;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Broker\Broker;
@@ -30,10 +27,15 @@ final class HandlerReturnTypeExtension implements DynamicMethodReturnTypeExtensi
      * @var CommandToHandlerMapping
      */
     private $mapping;
+    /**
+     * @var string
+     */
+    private $commandBusClass;
 
-    public function __construct(CommandToHandlerMapping $mapping)
+    public function __construct(CommandToHandlerMapping $mapping, string $commandBusClass)
     {
         $this->mapping = $mapping;
+        $this->commandBusClass = $commandBusClass;
     }
 
     public function setBroker(Broker $broker): void
@@ -43,7 +45,7 @@ final class HandlerReturnTypeExtension implements DynamicMethodReturnTypeExtensi
 
     public function getClass(): string
     {
-        return CommandBus::class;
+        return $this->commandBusClass;
     }
 
     public function isMethodSupported(MethodReflection $methodReflection): bool
