@@ -15,6 +15,7 @@ final class HandlerReturnTypeExtensionAlternateClassTest extends LevelsTestCase
     {
         return [
             ['MissingHandlerClassForAlternateBus'],
+            ['UnionAndIntersectionClassesBehaveProperly'],
         ];
     }
 

@@ -48,7 +48,9 @@ final class TacticianRuleSet implements Rule
 
     public function processNode(Node $methodCall, Scope $scope): array
     {
-        if (! $methodCall instanceof MethodCall) {
+        if (! $methodCall instanceof MethodCall
+            || ! $methodCall->name instanceof Node\Identifier
+            || $methodCall->name->name !== 'handle') {
             return [];
         }
 
