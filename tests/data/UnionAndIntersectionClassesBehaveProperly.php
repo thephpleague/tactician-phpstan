@@ -27,9 +27,9 @@ $commandBus = $builder->disableOriginalConstructor()
 
 class DerpBus
 {
-    public function handle(object $command): void
+    public function execute(object $command): void
     {
 
     }
 }
-$commandBus->expects(TestCase::once())->method('handle') ;
+$commandBus->expects(TestCase::once())->method('execute') ;

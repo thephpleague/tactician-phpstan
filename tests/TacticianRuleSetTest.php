@@ -21,7 +21,8 @@ final class TacticianRuleSetTest extends RuleTestCase
                 new Handle()
             ),
             $this->createBroker(),
-            CommandBus::class
+            CommandBus::class,
+            'handle'
         );
     }
 

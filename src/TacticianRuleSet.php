@@ -33,12 +33,17 @@ final class TacticianRuleSet implements Rule
      * @var string
      */
     private $commandBusClass;
+    /**
+     * @var string
+     */
+    private $commandBusMethod;
 
-    public function __construct(CommandToHandlerMapping $mapping, Broker $broker, string $commandBusClass)
+    public function __construct(CommandToHandlerMapping $mapping, Broker $broker, string $commandBusClass, string $commandBusMethod)
     {
         $this->mapping = $mapping;
         $this->broker = $broker;
         $this->commandBusClass = $commandBusClass;
+        $this->commandBusMethod = $commandBusMethod;
     }
 
     public function getNodeType(): string
@@ -50,7 +55,7 @@ final class TacticianRuleSet implements Rule
     {
         if (! $methodCall instanceof MethodCall
             || ! $methodCall->name instanceof Node\Identifier
-            || $methodCall->name->name !== 'handle') {
+            || $methodCall->name->name !== $this->commandBusMethod) {
             return [];
         }
 

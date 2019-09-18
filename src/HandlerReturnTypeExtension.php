@@ -31,11 +31,16 @@ final class HandlerReturnTypeExtension implements DynamicMethodReturnTypeExtensi
      * @var string
      */
     private $commandBusClass;
+    /**
+     * @var string
+     */
+    private $commandBusMethod;
 
-    public function __construct(CommandToHandlerMapping $mapping, string $commandBusClass)
+    public function __construct(CommandToHandlerMapping $mapping, string $commandBusClass, string $commandBusMethod)
     {
         $this->mapping = $mapping;
         $this->commandBusClass = $commandBusClass;
+        $this->commandBusMethod = $commandBusMethod;
     }
 
     public function setBroker(Broker $broker): void
@@ -50,7 +55,7 @@ final class HandlerReturnTypeExtension implements DynamicMethodReturnTypeExtensi
 
     public function isMethodSupported(MethodReflection $methodReflection): bool
     {
-        return $methodReflection->getName() === 'handle';
+        return $methodReflection->getName() === $this->commandBusMethod;
     }
 
     public function getTypeFromMethodCall(
