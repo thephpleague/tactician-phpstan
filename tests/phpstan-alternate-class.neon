@@ -4,5 +4,5 @@ includes:
 parameters:
     tactician:
         bootstrap: tests/handler-mapping-loader.php
-        bus: MissingHandlerClassForAlternateBus\DerpBus
+        class: MissingHandlerClassForAlternateBus\DerpBus
         method: execute

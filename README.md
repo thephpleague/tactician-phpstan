@@ -78,7 +78,7 @@ Instead, you can configure the command bus class to scan for, as well as (option
 parameters:
     tactician:
         bootstrap: handler-mapping-loader.php
-        bus: My\App\CommandBus
+        class: My\App\CommandBus
         method: execute
 ~~~
 

@@ -1,13 +1,13 @@
 parameters:
     tactician:
-        bus: League\Tactician\CommandBus
+        class: League\Tactician\CommandBus
         method: handle
 
 services:
     -
         class: League\Tactician\PHPStan\TacticianRuleSet
         arguments:
-            commandBusClass: %tactician.bus%
+            commandBusClass: %tactician.class%
             commandBusMethod: %tactician.method%
         tags:
             - phpstan.rules.rule
@@ -15,7 +15,7 @@ services:
     -
         class: League\Tactician\PHPStan\HandlerReturnTypeExtension
         arguments:
-            commandBusClass: %tactician.bus%
+            commandBusClass: %tactician.class%
             commandBusMethod: %tactician.method%
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension

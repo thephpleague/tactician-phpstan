@@ -38,8 +38,12 @@ final class TacticianRuleSet implements Rule
      */
     private $commandBusMethod;
 
-    public function __construct(CommandToHandlerMapping $mapping, Broker $broker, string $commandBusClass, string $commandBusMethod)
-    {
+    public function __construct(
+        CommandToHandlerMapping $mapping,
+        Broker $broker,
+        string $commandBusClass,
+        string $commandBusMethod
+    ) {
         $this->mapping = $mapping;
         $this->broker = $broker;
         $this->commandBusClass = $commandBusClass;
