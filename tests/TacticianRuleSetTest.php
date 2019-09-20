@@ -55,6 +55,14 @@ final class TacticianRuleSetTest extends RuleTestCase
         );
     }
 
+    public function testInterfacesAndAbstractClassesShouldNotBeReported(): void
+    {
+        $this->analyse(
+            [__DIR__ . '/data/InterfacesAndAbstractClassesShouldNotBeReported.php'],
+            []
+        );
+    }
+
     public function testHandlerDoesNotTakeParameters(): void
     {
         $this->analyse(
