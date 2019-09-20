@@ -155,19 +155,26 @@ final class TacticianRuleSet implements Rule
     /** @return TypeWithClassName[] */
     private function getInspectableCommandTypes(Type $type): array
     {
+        $types = [];
         if ($type instanceof TypeWithClassName) {
-            return [$type];
+            $types = [$type];
         }
 
         if ($type instanceof UnionType) {
-            return array_filter(
-                $type->getTypes(),
-                function (Type $type) {
-                    return $type instanceof TypeWithClassName;
-                }
-            );
+            $types = $type->getTypes();
         }
 
-        return [];
+        return array_filter(
+            $types,
+            function (Type $type) {
+                if(! $type instanceof TypeWithClassName) {
+                    return false;
+                }
+
+                $classReflection = $this->broker->getClass($type->getClassName());
+
+                return ! ($classReflection->isInterface() || $classReflection->isAbstract());
+            }
+        );
     }
 }
