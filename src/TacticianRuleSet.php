@@ -162,16 +162,17 @@ final class TacticianRuleSet implements Rule
         }
 
         if ($type instanceof UnionType) {
-            $types = $type->getTypes();
+            $types = array_filter(
+                $type->getTypes(),
+                function (Type $type) {
+                    return $type instanceof TypeWithClassName;
+                }
+            );
         }
 
         return array_filter(
             $types,
-            function (Type $type) {
-                if (! $type instanceof TypeWithClassName) {
-                    return false;
-                }
-
+            function (TypeWithClassName $type) {
                 if (! $this->broker->hasClass($type->getClassName())) {
                     return false;
                 }
