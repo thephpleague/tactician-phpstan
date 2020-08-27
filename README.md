@@ -10,8 +10,6 @@ Static analysis for [a small, flexible command bus](https://github.com/thephplea
 
 Traditionally, command buses can obscure static analysis. The Tactician PHPStan plugin helps bring stronger type checking by finding missing handler classes, validating handler return types and more.
 
-See the [full docs](http://tactician.thephpleague.com) or the examples directory to get started.
-
 ## Install
 
 Using Composer:
