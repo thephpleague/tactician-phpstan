@@ -1,3 +1,10 @@
+parametersSchema:
+	tactician: structure([
+	    class: string(),
+	    method: string(),
+	    bootstrap: schema(string(), assert('is_file')),
+	])
+
 parameters:
     tactician:
         class: League\Tactician\CommandBus
