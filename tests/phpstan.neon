@@ -4,3 +4,6 @@ includes:
 parameters:
     tactician:
         bootstrap: tests/handler-mapping-loader.php
+
+    ignoreErrors:
+        - "#has no return typehint specified#"
