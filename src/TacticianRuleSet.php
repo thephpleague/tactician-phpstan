@@ -19,6 +19,7 @@ use PHPStan\Type\UnionType;
 use function array_filter;
 use function array_merge;
 
+/** @implements \PHPStan\Rules\Rule<\PhpParser\Node\Expr\MethodCall> */
 final class TacticianRuleSet implements Rule
 {
     /**
