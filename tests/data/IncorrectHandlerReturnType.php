@@ -18,9 +18,10 @@ class SomeCommandHandler
     }
 }
 
-function run(CommandBus $bus)
+/** @return int[] */
+function run(CommandBus $bus): array
 {
-    array_values(
+    return array_values(
         $bus->handle(new SomeCommand())
     );
 }
