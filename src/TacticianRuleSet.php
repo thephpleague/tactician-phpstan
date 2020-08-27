@@ -167,9 +167,16 @@ final class TacticianRuleSet implements Rule
         return array_filter(
             $types,
             function (Type $type) {
-                return $type instanceof TypeWithClassName
-                    && ! $this->broker->getClass($type->getClassName())->isInterface()
-                    && ! $this->broker->getClass($type->getClassName())->isAbstract();
+                if (! $type instanceof TypeWithClassName) {
+                    return false;
+                }
+
+                if (! $this->broker->hasClass($type->getClassName())) {
+                    return false;
+                }
+
+                $class = $this->broker->getClass($type->getClassName());
+                return ! $class->isInterface() && ! $class->isAbstract();
             }
         );
     }
