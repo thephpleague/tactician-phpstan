@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace League\Tactician\PHPStan;
 
 use League\Tactician\Handler\Mapping\CommandToHandlerMapping;
+use League\Tactician\Handler\Mapping\MethodDoesNotExist;
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
@@ -96,7 +97,7 @@ final class TacticianRuleSet implements Rule
         Scope $scope,
         TypeWithClassName $commandType
     ): array {
-        $handlerClassName = $this->mapping->getClassName($commandType->getClassName());
+        [$handlerClassName, $handlerMethodName] = $this->getHandlerClassAndMethodNames($commandType);
 
         try {
             $handlerClass = $this->broker->getClass($handlerClassName);
@@ -106,8 +107,6 @@ final class TacticianRuleSet implements Rule
                 "handler {$handlerClassName}.",
             ];
         }
-
-        $handlerMethodName = $this->mapping->getMethodName($commandType->getClassName());
 
         try {
             $handlerMethod = $handlerClass->getMethod($handlerMethodName, $scope);
@@ -181,5 +180,20 @@ final class TacticianRuleSet implements Rule
                 return ! $class->isInterface() && ! $class->isAbstract();
             }
         );
+    }
+
+    /**
+     * @return string[]
+     */
+    private function getHandlerClassAndMethodNames(TypeWithClassName $commandType): array
+    {
+        try {
+            $handler = $this->mapping->mapCommandToHandler($commandType->getClassName());
+
+            return [$handler->getClassName(), $handler->getMethodName()];
+        } catch (MethodDoesNotExist $e) {
+            // Suppress this exception because PHPStan will find this on its own in a much nicer way
+            return [$e->getClassName(), $e->getMethodName()];
+        }
     }
 }

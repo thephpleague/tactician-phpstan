@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace League\Tactician\PHPStan;
 
 use League\Tactician\Handler\Mapping\CommandToHandlerMapping;
+use League\Tactician\Handler\Mapping\MethodDoesNotExist;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Broker\Broker;
@@ -69,22 +70,35 @@ final class HandlerReturnTypeExtension implements DynamicMethodReturnTypeExtensi
             return new MixedType();
         }
 
+        [$handlerClassName, $handlerMethodName] = $this->getHandlerClassAndMethodNames($commandType);
+
         try {
-            $handlerClass = $this->broker->getClass(
-                $this->mapping->getClassName($commandType->getClassName())
-            );
+            $handlerClass = $this->broker->getClass($handlerClassName);
         } catch (ClassNotFoundException $e) {
             return new MixedType();
         }
 
-        $methodName = $this->mapping->getMethodName($commandType->getClassName());
-
         try {
-            $method = $handlerClass->getMethod($methodName, $scope)->getVariants();
+            $method = $handlerClass->getMethod($handlerMethodName, $scope)->getVariants();
         } catch (MissingMethodFromReflectionException $e) {
             return new MixedType();
         }
 
         return ParametersAcceptorSelector::selectFromArgs($scope, $methodCall->args, $method)->getReturnType();
+    }
+
+    /**
+     * @return string[]
+     */
+    private function getHandlerClassAndMethodNames(ObjectType $commandType): array
+    {
+        try {
+            $handler = $this->mapping->mapCommandToHandler($commandType->getClassName());
+
+            return [$handler->getClassName(), $handler->getMethodName()];
+        } catch (MethodDoesNotExist $e) {
+            // Suppress this exception because PHPStan will find this on its own in a much nicer way
+            return [$e->getClassName(), $e->getMethodName()];
+        }
     }
 }
