@@ -188,7 +188,7 @@ final class TacticianRuleSet implements Rule
     private function getHandlerClassAndMethodNames(TypeWithClassName $commandType): array
     {
         try {
-            $handler = $this->mapping->mapCommandToHandler($commandType->getClassName());
+            $handler = $this->mapping->findHandlerForCommand($commandType->getClassName());
 
             return [$handler->getClassName(), $handler->getMethodName()];
         } catch (MethodDoesNotExist $e) {

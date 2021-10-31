@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace League\Tactician\Tests\PHPStan;
 
 use League\Tactician\CommandBus;
-use League\Tactician\Handler\Mapping\ClassName\Suffix;
-use League\Tactician\Handler\Mapping\MapByNamingConvention;
-use League\Tactician\Handler\Mapping\MethodName\Handle;
+use League\Tactician\Handler\Mapping\MapByNamingConvention\ClassName\Suffix;
+use League\Tactician\Handler\Mapping\MapByNamingConvention\MapByNamingConvention;
+use League\Tactician\Handler\Mapping\MapByNamingConvention\MethodName\Handle;
 use League\Tactician\PHPStan\TacticianRuleSet;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
