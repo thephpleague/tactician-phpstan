@@ -42,5 +42,10 @@
                 "extension.neon"
             ]
         }
+    },
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
     }
 }
